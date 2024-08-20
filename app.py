@@ -136,7 +136,7 @@ if __name__ == "__main__":
     text_to_check = "hi my namme iss lavi. mice to meet you."
     
     # Testing sapling_check
-    result = sapling_check(text_to_check,sapling_api_key)  # Pass the api_key
+    result = sapling_check(text_to_check,sapling_api_key)  # Passing the api_key
     print("Sapling check result:")
     print(json.dumps(result, indent=4))
     
