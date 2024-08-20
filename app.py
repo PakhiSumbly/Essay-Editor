@@ -10,7 +10,7 @@ import textstat
 app = Flask(__name__)
 
 
-# Load all API keys from environment variables
+# Loading all API keys from environment variables
 app.config['SAPLING_API_KEY'] = os.getenv('SAPLING_API_KEY')
 app.config['COPYLEAKS_API_KEY'] = os.getenv('COPYLEAKS_API_KEY')
 app.config['COPYSCAPE_API_KEY'] = os.getenv('COPYSCAPE_API_KEY')
@@ -101,15 +101,14 @@ def edit_essay():
     data = request.get_json()
     text = data['text']
 
-    # Retrieve API keys from the Flask config
+    # Retrieving API keys from the Flask config
     sapling_api_key = app.config['SAPLING_API_KEY']
     copyleaks_api_key = app.config['COPYLEAKS_API_KEY']
     copyscape_api_key = app.config['COPYSCAPE_API_KEY']
     zotero_api_key = app.config['ZOTERO_API_KEY']
     rapidapi_key = app.config['RAPIDAPI_KEY']
 
-    # Call each function with the appropriate API key
-
+    # Calling each function with the appropriate API key
     result = {
     'original_text': text,
     'corrected_text': check_grammar(text),
@@ -136,40 +135,39 @@ if __name__ == "__main__":
 
     text_to_check = "hi my namme iss lavi. mice to meet you."
     
-    # Test sapling_check
+    # Testing sapling_check
     result = sapling_check(text_to_check,sapling_api_key)  # Pass the api_key
     print("Sapling check result:")
     print(json.dumps(result, indent=4))
     
-    # Test check_grammer
+    # Testing check_grammer
     corrected_text = check_grammar(text_to_check)
     print("Grammar check result:")
     print(corrected_text)
     
-    # Test check_copyleaks
+    # Testing check_copyleaks
     copyleaks_result = check_copyleaks(text_to_check)
     print("Copyleaks check result:")
     print(json.dumps(copyleaks_result, indent=4))
     
-    # Test check_copyscape
+    # Testing check_copyscape
     copyscape_result = check_copyscape(text_to_check)
     print("Copyscape check result:")
     print(json.dumps(copyscape_result, indent=4))
     
-    # Test get_readability_scores
+    # Testing get_readability_scores
     readability_scores = get_readability_scores(text_to_check)
     print("Readability scores:")
     print(json.dumps(readability_scores, indent=4))
     
-    # Test get_zotero_citations
+    # Testing get_zotero_citations
     zotero_citations = get_zotero_citations(text_to_check)
     print("Zotero citations result:")
     print(json.dumps(zotero_citations, indent=4))
     
-    # Test paraphrase_with_rapidapi
+    # Testing paraphrase_with_rapidapi
     paraphrase_result = paraphrase_with_rapidapi(text_to_check)
     print("Paraphrasing result:")
     print(json.dumps(paraphrase_result, indent=4))
     
-    # Finally, start the Flask server
     app.run(debug=True)
